@@ -11,10 +11,13 @@
 //
 
 /*
-Key zawierające wskaźnik do drivera
-Tworzenie Key na podstawie odebranego bajtu (lookup table)
-Pętal updatowania eventów
-Obsługa znaków wielokliknięciowych - duże litery, polskie znaki
+Sterowanie serwerm przez sterownik      DONE
+Odbieranie znaków przez UART            DONE
+Tworzenie Key (lookup table)
+Tworzenie ClickEvent
+Update loop eventów
+Nakładanie kliknięć
+Kliknięcia jednoczesne
 */
 
 
