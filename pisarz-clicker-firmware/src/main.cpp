@@ -64,6 +64,9 @@ void updateEvents();
 
 ClickEvent clickEvent_create(uint16_t key, unsigned long time, uint8_t *returnCode);
 void clickEvent_update(ClickEvent *event, unsigned long time);
+
+Key key_create(uint16_t character, uint8_t *returnCode);
+
 void servoDown(Key key);
 void servoUp(Key key);
 
@@ -100,19 +103,7 @@ void loop() {
 }
 
 ClickEvent clickEvent_create(uint16_t character, unsigned long time, uint8_t *returnCode){
-    Key key;
-    *returnCode = 1;
-    if(character == 'a'){
-        key.driver = 0;
-        key.channel = 7;
-        key.dir = 0;
-        *returnCode = 0;
-    }
-    else{
-        key.driver = 0;
-        key.channel = 0;
-        key.dir = 0;
-    }
+    Key key = key_create(character, returnCode);
 
     ClickEvent event;
     event.key = key;
@@ -120,6 +111,35 @@ ClickEvent clickEvent_create(uint16_t character, unsigned long time, uint8_t *re
     event.state = BORN;
 
     return event;
+}
+
+Key key_create(uint16_t character, uint8_t *returnCode){
+    Key key;
+    *returnCode = 0;
+    if(character == 'a'){
+        key.driver = 0;
+        key.channel = 8;
+        key.dir = 0;
+    }
+    else if(character == 'b'){
+        key.driver = 0;
+        key.channel = 9;
+        key.dir = 0;
+    }
+    else if(character == 'c'){
+        key.driver = 0;
+        key.channel = 10;
+        key.dir = 0;
+    }
+    else if(character == 'd'){
+        key.driver = 0;
+        key.channel = 11;
+        key.dir = 0;
+    }
+    else
+        *returnCode = 1;
+
+    return key;
 }
 
 void receiveData(){
