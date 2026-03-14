@@ -2,6 +2,8 @@
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 
+#include "lut.h"
+
 #define SERVOMIN  120
 #define SERVOMAX  520
 #define SERVO_FREQ 50
@@ -20,7 +22,6 @@ Nakładanie kliknięć
 Kliknięcia jednoczesne
 */
 
-
 //
 // Drivers objects
 //
@@ -31,14 +32,20 @@ Adafruit_PWMServoDriver servoDriver = Adafruit_PWMServoDriver();
 // Data types
 //
 
+typedef enum{
+    LEFT,
+    RIGHT
+} servoDir;
+
 typedef struct{
-    uint8_t driver;
+    Adafruit_PWMServoDriver *driver;
     uint8_t channel;
-    uint8_t dir;
+    servoDir dir;
 } Key;
 
 typedef enum{
-    BORN,
+    EMPTY,
+    CREATED,
     CLICKING,
     RETURNING,
     DONE
@@ -102,46 +109,6 @@ void loop() {
     delay(500);
 }
 
-ClickEvent clickEvent_create(uint16_t character, unsigned long time, uint8_t *returnCode){
-    Key key = key_create(character, returnCode);
-
-    ClickEvent event;
-    event.key = key;
-    event.bornTime = time;
-    event.state = BORN;
-
-    return event;
-}
-
-Key key_create(uint16_t character, uint8_t *returnCode){
-    Key key;
-    *returnCode = 0;
-    if(character == 'a'){
-        key.driver = 0;
-        key.channel = 8;
-        key.dir = 0;
-    }
-    else if(character == 'b'){
-        key.driver = 0;
-        key.channel = 9;
-        key.dir = 0;
-    }
-    else if(character == 'c'){
-        key.driver = 0;
-        key.channel = 10;
-        key.dir = 0;
-    }
-    else if(character == 'd'){
-        key.driver = 0;
-        key.channel = 11;
-        key.dir = 0;
-    }
-    else
-        *returnCode = 1;
-
-    return key;
-}
-
 void receiveData(){
     if(Serial.available() > 0){
         uint8_t incomingByte = Serial.read();
@@ -156,4 +123,36 @@ void receiveData(){
             clickEventTabLen++;
         }
     }
+}
+
+ClickEvent clickEvent_create(uint16_t character, unsigned long time, uint8_t *returnCode){
+    Key key = key_create(character, returnCode);
+
+    ClickEvent event;
+    event.key = key;
+    event.bornTime = time;
+    event.state = CREATED;
+
+    return event;
+}
+
+Key key_create(uint16_t character, uint8_t *returnCode){
+    Key key;
+    *returnCode = 0;
+
+    // Lookup table must be inserted here instead of line of if statements
+    if(character == 'a'){
+        key.driver = &servoDriver;
+        key.channel = servoChannelLUT['a'];
+        key.dir = LEFT;
+    }
+    else if(character == 'b'){
+        key.driver = &servoDriver;
+        key.channel = servoChannelLUT['b'];
+        key.dir = LEFT;
+    }
+    else
+        *returnCode = 1;
+
+    return key;
 }
