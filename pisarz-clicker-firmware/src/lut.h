@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
-extern const uint8_t servoChannelLUT[256];
+extern uint8_t servoChannelLUT[256];
+
+void servoChannelLUTInit();
 
 #endif

@@ -90,6 +90,9 @@ void setup() {
     servoDriver.setOscillatorFrequency(27000000);
     servoDriver.setPWMFreq(SERVO_FREQ);
 
+    //LUTs init
+    servoChannelLUTInit();
+
     delay(10);
 }
 
