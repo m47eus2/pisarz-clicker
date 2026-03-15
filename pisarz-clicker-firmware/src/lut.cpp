@@ -1,4 +1,5 @@
 #include "lut.h"
+#include "servoDrivers.h"
 
 const uint8_t servoChannelLUT[96] = {
     0, // ASCII 33 (!)

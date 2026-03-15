@@ -2,8 +2,11 @@
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 
+#include "servoDrivers.h"
 #include "key.h"
 #include "clickEvent.h"
+
+#define EVENTTABMAXLEN 50
 
 #define SERVOMIN  120
 #define SERVOMAX  520
@@ -16,44 +19,35 @@
 /*
 Sterowanie serwerm przez sterownik      DONE
 Odbieranie znaków przez UART            DONE
-Tworzenie Key (lookup table)
-Tworzenie ClickEvent
+Tworzenie Key (lookup table)            DONE
+Tworzenie ClickEvent                    DONE
 Update loop eventów
 Nakładanie kliknięć
 Kliknięcia jednoczesne
 */
 
 //
-// Drivers objects
+// Event tab
 //
 
-Adafruit_PWMServoDriver servoDriver = Adafruit_PWMServoDriver();
-
-//
-// Data types
-//
-
-ClickEvent clickEventTab[50];
+ClickEvent clickEventTab[EVENTTABMAXLEN];
 uint8_t clickEventTabLen = 0;
 
 //
-// Functions
+// Functions prototypes
 //
 
 void showEventTab(uint8_t n);
 void receiveData();
 void updateEvents();
 
-void servoDown(Key key);
-void servoUp(Key key);
-
-
-uint8_t servonum = 7;
+//
+// Setup
+//
 
 void setup() {
     // Serial setup
     Serial.begin(9600);
-    Serial.println("8 channel Servo test!");
 
     // Servo drivers setup
     servoDriver.begin();
@@ -63,24 +57,36 @@ void setup() {
     delay(10);
 }
 
+//
+// Main loop
+//
+
 void loop() {
     // servoDriver.setPWM(servonum, 0, SERVOMIN);
-
     // delay(1000);
-  
     // servoDriver.setPWM(servonum, 0, SERVOMAX);
-
     // delay(1000);
 
     receiveData();
-    
-    // for(int i=0; i<10; i++)
-    //     Serial.print(clickEventTab[i].key.channel);
-    //Serial.println();
-
     showEventTab(5);
 
     delay(500);
+}
+
+//
+// Functions
+//
+
+void receiveData(){
+    if(Serial.available() > 0){
+        uint8_t incomingByte = Serial.read();
+        uint8_t retCode;
+        ClickEvent event = clickEvent_create(incomingByte, millis(), &retCode);
+        if(retCode == 0 && clickEventTabLen < EVENTTABMAXLEN){
+            clickEventTab[clickEventTabLen] = event;
+            clickEventTabLen++;
+        }
+    }
 }
 
 void showEventTab(uint8_t n){
@@ -99,20 +105,3 @@ void showEventTab(uint8_t n){
     }
     Serial.println();
 }
-
-void receiveData(){
-    if(Serial.available() > 0){
-        uint8_t incomingByte = Serial.read();
-
-        Serial.print("Received: ");
-        Serial.println(incomingByte, DEC);
-
-        uint8_t retCode;
-        ClickEvent event = clickEvent_create(incomingByte, millis(), &retCode);
-        if(retCode == 0){
-            clickEventTab[clickEventTabLen] = event;
-            clickEventTabLen++;
-        }
-    }
-}
-
