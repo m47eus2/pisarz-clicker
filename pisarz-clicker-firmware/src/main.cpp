@@ -143,16 +143,16 @@ Key key_create(uint16_t character, uint8_t *returnCode){
     // Lookup table must be inserted here instead of line of if statements
     if(character == 'a'){
         key.driver = &servoDriver;
-        key.channel = servoChannelLUT['a'-33];
+        //key.channel = servoChannelLUT['a'-33];
         key.dir = LEFT;
     }
     else if(character == 'b'){
         key.driver = &servoDriver;
-        key.channel = servoChannelLUT['b'-33];
+        //key.channel = servoChannelLUT['b'-33];
         key.dir = LEFT;
     }
-    else
-        *returnCode = 1;
+
+    key.channel = getServoChannelFromLUT(character, returnCode);
 
     return key;
 }

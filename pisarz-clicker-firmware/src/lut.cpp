@@ -195,3 +195,21 @@ const Adafruit_PWMServoDriver *servoDriverLUT[96] = {
     &servoDriver, // ASCII 126 (~)
     &servoDriver // ASCII 127 ()
 };
+
+uint8_t getServoChannelFromLUT(uint8_t character, uint8_t *returnCode){
+    if(character >= 33 && character <= 127)
+        return servoChannelLUT[character - 33];
+    else{
+        *returnCode = 1;
+        return servoChannelLUT[0];
+    }
+}
+
+// Adafruit_PWMServoDriver *getServoDriverFromLUT(uint8_t character, uint8_t *returnCode){
+//     if(character >= 33 && character <= 127)
+//         return servoDriverLUT[character - 33];
+//     else{
+//         *returnCode = 1;
+//         return servoDriverLUT[0];
+//     }
+// }
