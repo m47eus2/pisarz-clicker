@@ -40,6 +40,7 @@ uint8_t clickEventTabLen = 0;
 // Functions
 //
 
+void showEventTab(uint8_t n);
 void receiveData();
 void updateEvents();
 
@@ -72,10 +73,31 @@ void loop() {
     // delay(1000);
 
     receiveData();
-    for(int i=0; i<10; i++)
+    
+    // for(int i=0; i<10; i++)
+    //     Serial.print(clickEventTab[i].key.channel);
+    //Serial.println();
+
+    showEventTab(5);
+
+    delay(500);
+}
+
+void showEventTab(uint8_t n){
+    Serial.println("=== === Event Tab === ===");
+    for(int i=0; i < n; i++){
+        Serial.print("Idx: ");
+        Serial.print(i);
+        Serial.print("   state: ");
+        Serial.print(clickEventTab[i].state);
+        Serial.print("   driver: ");
+        Serial.print((uintptr_t)clickEventTab[i].key.driver, HEX);
+        Serial.print("   key.channel: ");
         Serial.print(clickEventTab[i].key.channel);
+        Serial.print("   key.dir: ");
+        Serial.println(clickEventTab[i].key.dir);
+    }
     Serial.println();
-    delay(200);
 }
 
 void receiveData(){
