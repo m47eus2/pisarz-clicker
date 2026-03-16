@@ -1,12 +1,33 @@
 #include "clickEvent.h"
 
-ClickEvent clickEvent_create(uint16_t character, unsigned long time, uint8_t *returnCode){
+ClickEvent clickEvent_create(uint16_t character, uint8_t *returnCode){
     Key key = key_create(character, returnCode);
 
     ClickEvent event;
     event.key = key;
-    event.bornTime = time;
     event.state = CREATED;
 
     return event;
+}
+
+ClickEvent clickEvent_createEmpty(){
+    ClickEvent event;
+    event.state = EMPTY;
+
+    return event;
+}
+
+void clickEvent_update(ClickEvent *event, ClickEvent prevEvent ,unsigned long time){
+    if(event->state == CREATED && (prevEvent.state == EMPTY || time - prevEvent.clickingTime >= SERVO_SEPARATE_KEY_DELAY)){
+        servoDown(event->key);
+        event->clickingTime = time;
+        event->state = CLICKING;
+    }
+    else if(event->state == CLICKING && time - event->clickingTime >= SERVO_CLICKING_TIME){
+        servoUp(event->key);
+        event->state = RETURNING;
+    }
+    else if(event->state == RETURNING && time - event->clickingTime >= SERVO_RETURNING_TIME){
+        event->state = DONE;
+    }
 }

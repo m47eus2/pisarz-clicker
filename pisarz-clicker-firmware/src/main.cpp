@@ -6,7 +6,7 @@
 #include "key.h"
 #include "clickEvent.h"
 
-#define EVENTTABMAXLEN 50
+#define CLICKEVENT_TAB_MAX_LEN 50
 
 
 //
@@ -21,7 +21,7 @@ Tworzenie ClickEvent                    DONE
 Update loop eventów
 {
 Kręcenie serwerm z drivera              DONE
-Funkcje servoDown, servoUp              
+Funkcje servoDown, servoUp              DONE
 Kolejkowanie bez nakładania
 }
 Nakładanie kliknięć
@@ -32,7 +32,7 @@ Kliknięcia jednoczesne
 // Event tab
 //
 
-ClickEvent clickEventTab[EVENTTABMAXLEN];
+ClickEvent clickEventTab[CLICKEVENT_TAB_MAX_LEN];
 uint8_t clickEventTabLen = 0;
 
 //
@@ -71,9 +71,8 @@ void loop() {
 
     receiveData();
     showEventTab(5);
-    servoDown(clickEventTab[0].key);
-
-    delay(500);
+    updateEvents();
+    delay(20);
 }
 
 //
@@ -84,11 +83,23 @@ void receiveData(){
     if(Serial.available() > 0){
         uint8_t incomingByte = Serial.read();
         uint8_t retCode;
-        ClickEvent event = clickEvent_create(incomingByte, millis(), &retCode);
-        if(retCode == 0 && clickEventTabLen < EVENTTABMAXLEN){
+        ClickEvent event = clickEvent_create(incomingByte, &retCode);
+        if(retCode == 0 && clickEventTabLen < CLICKEVENT_TAB_MAX_LEN){
             clickEventTab[clickEventTabLen] = event;
             clickEventTabLen++;
         }
+    }
+}
+
+void updateEvents(){
+    ClickEvent prevEvent = clickEvent_createEmpty();
+    for(uint16_t i=0; i < CLICKEVENT_TAB_MAX_LEN; i++){
+        if(clickEventTab[i].state != EMPTY){
+            clickEvent_update(&(clickEventTab[i]), prevEvent, millis());
+            prevEvent = clickEventTab[i];
+        }
+        else
+            break;
     }
 }
 

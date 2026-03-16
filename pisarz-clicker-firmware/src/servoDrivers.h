@@ -7,6 +7,12 @@
 #define SERVOMIN 120
 #define SERVOMAX 520
 #define SERVOMID 320
+
+#define SERVO_CLICKING_TIME 1024
+#define SERVO_RETURNING_TIME 1024
+#define SERVO_SEPARATE_KEY_DELAY 1024
+#define SERVO_SIMULT_KEY_DELAY 1024
+
 #define SERVO_FREQ 50
 
 extern Adafruit_PWMServoDriver servoDriver;
