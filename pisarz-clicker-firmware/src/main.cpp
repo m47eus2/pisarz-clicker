@@ -43,6 +43,8 @@ void showEventTab(uint8_t n);
 void receiveData();
 void updateEvents();
 
+void servoManualControll();
+
 //
 // Setup
 //
@@ -52,9 +54,7 @@ void setup() {
     Serial.begin(9600);
 
     // Servo drivers setup
-    servoDriver.begin();
-    servoDriver.setOscillatorFrequency(27000000);
-    servoDriver.setPWMFreq(SERVO_FREQ);
+    initServoDriver(&servoDriver);
 
     delay(10);
 }
@@ -64,11 +64,6 @@ void setup() {
 //
 
 void loop() {
-    // servoDriver.setPWM(7, 0, SERVOMIN);
-    // delay(1000);
-    // servoDriver.setPWM(7, 0, SERVOMAX);
-    // delay(1000);
-
     receiveData();
     showEventTab(5);
     updateEvents();
@@ -118,4 +113,15 @@ void showEventTab(uint8_t n){
         Serial.println(clickEventTab[i].key.dir);
     }
     Serial.println();
+}
+
+void servoManualControll(){
+    static uint16_t manualValue = SERVOMID;
+    if(Serial.available() > 0){
+        uint8_t incomingByte = Serial.read();
+        if(incomingByte == 'w') manualValue++;
+        else if(incomingByte == 's') manualValue--;
+    }
+    Serial.println(manualValue);
+    servoDriver.setPWM(8, 0, manualValue);
 }
