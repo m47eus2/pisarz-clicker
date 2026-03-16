@@ -11,3 +11,11 @@ Key key_create(uint16_t character, uint8_t *returnCode){
 
     return key;
 }
+
+Key key_createEmpty(){
+    Key key;
+    key.driver = 0;
+    key.channel = 0;
+    key.dir = LEFT;
+    return key;
+}

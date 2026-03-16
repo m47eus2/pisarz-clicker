@@ -16,5 +16,6 @@ typedef struct{
 } Key;
 
 Key key_create(uint16_t character, uint8_t *returnCode);
+Key key_createEmpty();
 
 #endif
