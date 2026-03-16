@@ -8,9 +8,6 @@
 
 #define EVENTTABMAXLEN 50
 
-#define SERVOMIN  120
-#define SERVOMAX  520
-#define SERVO_FREQ 50
 
 //
 // TODO
@@ -22,6 +19,11 @@ Odbieranie znaków przez UART            DONE
 Tworzenie Key (lookup table)            DONE
 Tworzenie ClickEvent                    DONE
 Update loop eventów
+{
+Kręcenie serwerm z drivera              DONE
+Funkcje servoDown, servoUp              
+Kolejkowanie bez nakładania
+}
 Nakładanie kliknięć
 Kliknięcia jednoczesne
 */
@@ -62,13 +64,14 @@ void setup() {
 //
 
 void loop() {
-    // servoDriver.setPWM(servonum, 0, SERVOMIN);
+    // servoDriver.setPWM(7, 0, SERVOMIN);
     // delay(1000);
-    // servoDriver.setPWM(servonum, 0, SERVOMAX);
+    // servoDriver.setPWM(7, 0, SERVOMAX);
     // delay(1000);
 
     receiveData();
     showEventTab(5);
+    servoDown(clickEventTab[0].key);
 
     delay(500);
 }

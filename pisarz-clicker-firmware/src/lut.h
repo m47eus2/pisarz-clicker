@@ -7,7 +7,7 @@
 
 
 const uint8_t getServoChannelFromLUT(uint8_t character, uint8_t *returnCode);
-const Adafruit_PWMServoDriver *getServoDriverFromLUT(uint8_t character, uint8_t *returnCode);
+Adafruit_PWMServoDriver *getServoDriverFromLUT(uint8_t character, uint8_t *returnCode);
 const servoDir getServoDirFromLUT(uint8_t character, uint8_t *returnCode);
 
 

@@ -10,7 +10,7 @@ typedef enum{
 } servoDir;
 
 typedef struct{
-    const Adafruit_PWMServoDriver *driver;
+    Adafruit_PWMServoDriver *driver;
     uint8_t channel;
     servoDir dir;
 } Key;
