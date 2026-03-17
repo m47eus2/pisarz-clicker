@@ -21,7 +21,7 @@ Update loop eventów
 {
 Kręcenie serwerm z drivera              DONE
 Funkcje servoDown, servoUp              DONE
-Kolejkowanie bez nakładania
+Kolejkowanie bez nakładania             DONE
 }
 Nakładanie kliknięć
 Kliknięcia jednoczesne
