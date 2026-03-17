@@ -41,7 +41,7 @@ void servoManualControll();
 
 void setup() {
     // Serial setup
-    Serial.begin(9600);
+    Serial.begin(115200);
 
     // Servo drivers setup
     initServoDriver(&servoDriver);
@@ -56,7 +56,7 @@ void setup() {
 void loop() {
     receiveData();
     clickEventTab_updateEvents();
-    clickEventTab_showEventTab();
+    //clickEventTab_showEventTab();
     clickEventTab_removeDoneEvents();
 }
 
