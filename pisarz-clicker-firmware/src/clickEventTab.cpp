@@ -32,6 +32,8 @@ void clickEventTab_updateEvents(){
 
 void clickEventTab_showEventTab(){
     if(clickEventTabLen){
+        if(clickEventTabLen > 5)
+            clickEventTabLen = 5;
         Serial.print("=== === Event Tab === ");
         Serial.print("events: ");
         Serial.println(clickEventTabLen);

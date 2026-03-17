@@ -17,5 +17,6 @@ typedef struct{
 
 Key key_create(uint16_t character, uint8_t *returnCode);
 Key key_createEmpty();
+uint8_t key_checkEqual(Key keya, Key keyb);
 
 #endif

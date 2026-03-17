@@ -19,3 +19,10 @@ Key key_createEmpty(){
     key.dir = LEFT;
     return key;
 }
+
+uint8_t key_checkEqual(Key keya, Key keyb){
+    if(keya.channel == keyb.channel && keya.driver == keyb.driver && keya.dir == keyb.dir)
+        return 1;
+    else
+        return 0;
+}
