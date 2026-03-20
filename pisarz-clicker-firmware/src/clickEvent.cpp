@@ -35,8 +35,6 @@ void clickEvent_update(ClickEvent *event, ClickEvent prevEvent){
     // }
     unsigned long time = millis();
     if(event->state == CREATED){
-        if(key_checkEqual(event->key, prevEvent.key))
-            return; // Break must be inserted here
         if((prevEvent.state >= CLICKING && time - prevEvent.clickingTime >= SERVO_TIME_BEETWEEN_CLICKS) || prevEvent.state == EMPTY){
             servoDown(event->key);
             event->state = CLICKING;

@@ -28,6 +28,11 @@ Znaki dwu-klawiszowe:
 Duże litery (shift)
 Polskie znaki dwu-bajtowe (alt)
 PICP (Pisarz-Internal-Communication-Protocol) Parser
+
+Fast typing:
+Któtki delay pomiędzy przyciśnięciami
+Przed każdym rozpoczęciem clicking sprawdzanie czy nie istnieje event
+z takim samym key w stanie clicking albo returning
 */
 
 //

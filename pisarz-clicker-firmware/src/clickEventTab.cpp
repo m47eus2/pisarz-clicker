@@ -23,6 +23,8 @@ void clickEventTab_updateEvents(){
     ClickEvent prevEvent = clickEvent_createEmpty();
     for(uint8_t i=0; i < clickEventTabLen; i++){
         if(clickEventTab[i].state != EMPTY){
+            if(key_checkEqual(clickEventTab[i].key, prevEvent.key))
+                break;
             clickEvent_update(&(clickEventTab[i]), prevEvent);
             prevEvent = clickEventTab[i];
         }
