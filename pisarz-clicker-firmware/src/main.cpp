@@ -25,11 +25,11 @@ Kolejkowanie bez nakładania             DONE
 Nakładanie kliknięć                     DONE
 
 Znaki dwu-klawiszowe:
-Duże litery (shift)
+Duże litery (shift)                     DONE
 Polskie znaki dwu-bajtowe (alt)
 PICP (Pisarz-Internal-Communication-Protocol) Parser
 
-Fast typing:
+Fast typing:                            DONE
 Któtki delay pomiędzy przyciśnięciami
 Przed każdym rozpoczęciem clicking sprawdzanie czy nie istnieje event
 z takim samym key w stanie clicking albo returning
