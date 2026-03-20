@@ -3,10 +3,14 @@
 ClickEvent clickEventTab[CLICKEVENT_TAB_MAX_LEN];
 uint8_t clickEventTabLen = 0;
 
-void clickEventTab_addEvent(ClickEvent event){
+void clickEventTab_addEvent(uint8_t incommingByte){
     if(clickEventTabLen < CLICKEVENT_TAB_MAX_LEN){
-        clickEventTab[clickEventTabLen] = event;
-        clickEventTabLen++;
+        uint8_t retCode;
+        ClickEvent event = clickEvent_create(incommingByte, &retCode);
+        if(retCode == 0){
+            clickEventTab[clickEventTabLen] = event;
+            clickEventTabLen++;
+        }
     }
 }
 

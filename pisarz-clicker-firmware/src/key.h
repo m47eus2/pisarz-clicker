@@ -15,7 +15,7 @@ typedef struct{
     servoDir dir;
 } Key;
 
-Key key_create(uint16_t character, uint8_t *returnCode);
+Key key_create(uint8_t character, uint8_t *returnCode);
 Key key_createEmpty();
 uint8_t key_checkEqual(Key keya, Key keyb);
 

@@ -1,6 +1,6 @@
 #include "clickEvent.h"
 
-ClickEvent clickEvent_create(uint16_t character, uint8_t *returnCode){
+ClickEvent clickEvent_create(uint8_t character, uint8_t *returnCode){
     Key key = key_create(character, returnCode);
 
     ClickEvent event;

@@ -74,10 +74,7 @@ void loop() {
 void receiveData(){
     while(Serial.available() > 0){
         uint8_t incomingByte = Serial.read();
-        uint8_t retCode;
-        ClickEvent event = clickEvent_create(incomingByte, &retCode);
-        if(retCode == 0)
-            clickEventTab_addEvent(event);
+        clickEventTab_addEvent(incomingByte);
     }
 }
 

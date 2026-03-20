@@ -1,7 +1,7 @@
 #include "key.h"
 #include "lut.h"
 
-Key key_create(uint16_t character, uint8_t *returnCode){
+Key key_create(uint8_t character, uint8_t *returnCode){
     Key key;
     *returnCode = 0;
 
