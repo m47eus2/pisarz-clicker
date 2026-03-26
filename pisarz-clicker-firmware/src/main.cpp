@@ -3,8 +3,6 @@
 #include <Adafruit_PWMServoDriver.h>
 
 #include "servoDrivers.h"
-#include "key.h"
-#include "clickEvent.h"
 #include "clickEventTab.h"
 #include "parser.h"
 
@@ -18,19 +16,13 @@ Sterowanie serwerm przez sterownik      DONE
 Odbieranie znaków przez UART            DONE
 Tworzenie Key (lookup table)            DONE
 Tworzenie ClickEvent                    DONE
-
-Update loop eventów:
 Kręcenie serwerm z drivera              DONE
 Funkcje servoDown, servoUp              DONE
 Kolejkowanie bez nakładania             DONE
 Nakładanie kliknięć                     DONE
-
-Znaki dwu-klawiszowe:
 Duże litery (shift)                     DONE
 Polskie znaki dwu-bajtowe (alt)         DONE
-                             
 Fast typing                             DONE
-
 Dwa znaki po sobie na jednym serwie     DONE
 PICP Parser
 */
@@ -47,12 +39,8 @@ void servoManualControll();
 //
 
 void setup() {
-    // Serial setup
     Serial.begin(115200);
-
-    // Servo drivers setup
     initServoDrivers();
-
     delay(10);
 }
 
@@ -74,13 +62,12 @@ void loop() {
 void receiveData(){
     while(Serial.available() > 0){
         uint8_t incomingByte = Serial.read();
-        //Serial.println(incomingByte);
         parser_readByte(incomingByte);
     }
 }
 
 //
-// DEBUGGING
+// DEBUG
 //
 
 void servoManualControll(){

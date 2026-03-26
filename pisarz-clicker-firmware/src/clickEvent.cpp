@@ -1,4 +1,5 @@
 #include "clickEvent.h"
+#include "servoDrivers.h"
 
 ClickEvent clickEvent_create(uint8_t character, uint8_t *returnCode){
     Key key = key_create(character, returnCode);
