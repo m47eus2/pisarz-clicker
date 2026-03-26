@@ -103,7 +103,7 @@ void clickEventTab_updateEvents(){
             // Sprawdzenie czy nie istnieje event z tym samym key
             uint8_t breakingUpdateLoop = 0;
             for(uint8_t j=0; j<i; j++){
-                if(key_checkEqual(clickEventTab[i].key, clickEventTab[j].key))
+                if(key_checkServoEqual(clickEventTab[i].key, clickEventTab[j].key))
                     breakingUpdateLoop = 1;
             }
             if(breakingUpdateLoop)

@@ -20,8 +20,8 @@ Key key_createEmpty(){
     return key;
 }
 
-uint8_t key_checkEqual(Key keya, Key keyb){
-    if(keya.channel == keyb.channel && keya.driver == keyb.driver && keya.dir == keyb.dir)
+uint8_t key_checkServoEqual(Key keya, Key keyb){
+    if(keya.channel == keyb.channel && keya.driver == keyb.driver)
         return 1;
     else
         return 0;
