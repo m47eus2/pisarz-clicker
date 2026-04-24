@@ -24,6 +24,7 @@ Duże litery (shift)                     DONE
 Polskie znaki dwu-bajtowe (alt)         DONE
 Fast typing                             DONE
 Dwa znaki po sobie na jednym serwie     DONE
+Duże polskie znaki
 PICP Parser
 */
 
