@@ -1,6 +1,7 @@
 #include "servoDrivers.h"
 
 Adafruit_PWMServoDriver servoDriver = Adafruit_PWMServoDriver();
+Adafruit_PWMServoDriver servoDriver2 = Adafruit_PWMServoDriver(0x41);
 
 void initServoDriver(Adafruit_PWMServoDriver *driver){
     driver->begin();
@@ -13,6 +14,7 @@ void initServoDriver(Adafruit_PWMServoDriver *driver){
 
 void initServoDrivers(){
     initServoDriver(&servoDriver);
+    initServoDriver(&servoDriver2);
 }
 
 void servoDown(Key key){

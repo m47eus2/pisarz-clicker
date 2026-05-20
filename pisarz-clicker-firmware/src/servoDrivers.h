@@ -5,7 +5,7 @@
 #include <Adafruit_PWMServoDriver.h>
 #include "key.h"
 
-#define SERVOMIN 100
+#define SERVOMIN 101
 #define SERVOMID 304
 #define SERVOMAX 505
 
@@ -16,6 +16,7 @@
 #define SERVO_FREQ 50
 
 extern Adafruit_PWMServoDriver servoDriver;
+extern Adafruit_PWMServoDriver servoDriver2;
 
 void initServoDriver(Adafruit_PWMServoDriver *driver);
 void initServoDrivers();
