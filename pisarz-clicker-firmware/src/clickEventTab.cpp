@@ -138,3 +138,13 @@ void clickEventTab_showEventTab(){
         Serial.println();
     }
 }
+
+void clickEventTab_showEventTabLength(){
+    static uint8_t prevClickEventTabLen = 0;
+
+    if(clickEventTabLen != prevClickEventTabLen){
+        Serial.println(clickEventTabLen);
+    }
+
+    prevClickEventTabLen = clickEventTabLen;
+}

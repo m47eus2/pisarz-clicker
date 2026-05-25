@@ -3,11 +3,12 @@
 
 #include "clickEvent.h"
 
-#define CLICKEVENT_TAB_MAX_LEN 50
+#define CLICKEVENT_TAB_MAX_LEN 80
 
 void clickEventTab_addEvent(uint8_t incommingByte);
 void clickEventTab_removeDoneEvents();
 void clickEventTab_updateEvents();
 void clickEventTab_showEventTab();
+void clickEventTab_showEventTabLength();
 
 #endif

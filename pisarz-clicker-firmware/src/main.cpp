@@ -53,6 +53,7 @@ void loop() {
     receiveData();
     clickEventTab_updateEvents();
     //clickEventTab_showEventTab();
+    clickEventTab_showEventTabLength();
     clickEventTab_removeDoneEvents();
 }
 
