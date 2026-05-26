@@ -5,9 +5,9 @@
 #include <Adafruit_PWMServoDriver.h>
 #include "key.h"
 
-#define SERVOMIN 101
-#define SERVOMID 304
-#define SERVOMAX 505
+#define SERVOMIN 270
+#define SERVOMID 300
+#define SERVOMAX 330
 
 #define SERVO_CLICKING_TIME 300
 #define SERVO_RETURNING_TIME 600
