@@ -141,9 +141,19 @@ void clickEventTab_showEventTab(){
 
 void clickEventTab_showEventTabLength(){
     static uint8_t prevClickEventTabLen = 0;
+    static uint8_t haltMode = 0;
 
     if(clickEventTabLen != prevClickEventTabLen){
-        Serial.println(clickEventTabLen);
+        // Serial.println(clickEventTabLen);
+
+        if(haltMode == 0 && clickEventTabLen >= 70){
+            Serial.println("HALT");
+            haltMode = 1;
+        }
+        if(haltMode && clickEventTabLen <= 30){
+            Serial.println("KAWAII");
+            haltMode = 0;
+        }
     }
 
     prevClickEventTabLen = clickEventTabLen;
