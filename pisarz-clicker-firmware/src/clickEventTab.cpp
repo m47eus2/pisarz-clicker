@@ -92,7 +92,7 @@ void clickEventTab_removeDoneEvents(){
 void clickEventTab_updateEvents(){
     ClickEvent prevEvent = clickEvent_createEmpty();
     for(uint8_t i=0; i < clickEventTabLen; i++){                    /* Iteracja po kolejce klawiszy do kliknięcia */
-        if(clickEventTab[i].state != EMPTY){                        /* Sprawdzanie czy event nie jest pusty*/
+        if(clickEventTab[i].state != EMPTY){
 
             if(i != 0 && prevEvent.state < CLICKING)                /* Jeśli poprzedni event nie rozpoczął kliknięcia przerywanie pętli*/
                 break;

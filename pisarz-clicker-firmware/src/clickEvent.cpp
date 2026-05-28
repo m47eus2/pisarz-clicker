@@ -23,7 +23,7 @@ ClickEvent clickEvent_createEmpty(){
 
 void clickEvent_update(ClickEvent *event, ClickEvent *prevEvent){
     unsigned long time = millis();
-    if(event->state == CREATED){        /* CREATED -> CLICKING jeśli poprzedni event jest w trakcie klikania i minął czas BEETWEEN_CLICKS CREATED */
+    if(event->state == CREATED){        /* CREATED -> CLICKING jeśli poprzedni event jest w trakcie klikania i minął czas BEETWEEN_CLICKS */
         if((prevEvent->state >= CLICKING && time - prevEvent->clickingTime >= SERVO_TIME_BEETWEEN_CLICKS) || prevEvent->state == EMPTY){
             servoDown(event->key);
             event->state = CLICKING;
