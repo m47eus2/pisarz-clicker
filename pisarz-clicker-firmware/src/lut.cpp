@@ -9,6 +9,10 @@
 #define ALT_DRIVER &servoDriver2
 #define ALT_DIR LEFT
 
+#define SPACE_CHANNEL 1
+#define SPACE_DRIVER &servoDriver2
+#define SPACE_DIR RIGHT
+
 const uint8_t servoChannelLUT[96] = {
     7, // ASCII 33 (!)
     7, // ASCII 34 (")
@@ -366,6 +370,8 @@ const servoDir servoDirLUT[96] = {
 const uint8_t getServoChannelFromLUT(uint8_t character, uint8_t *returnCode){
     if(character >= 33 && character <= 127)
         return servoChannelLUT[character - 33];
+    else if (character == 32)
+        return SPACE_CHANNEL;
     else if(character == SHIFT_CODE)
         return SHIFT_CHANNEL;
     else if(character == ALT_CODE)
@@ -379,6 +385,8 @@ const uint8_t getServoChannelFromLUT(uint8_t character, uint8_t *returnCode){
 Adafruit_PWMServoDriver *getServoDriverFromLUT(uint8_t character, uint8_t *returnCode){
     if(character >= 33 && character <= 127)
         return servoDriverLUT[character - 33];
+    else if (character == 32)
+        return SPACE_DRIVER;
     else if(character == SHIFT_CODE)
         return SHIFT_DRIVER;
     else if(character == ALT_CODE)
@@ -392,6 +400,8 @@ Adafruit_PWMServoDriver *getServoDriverFromLUT(uint8_t character, uint8_t *retur
 const servoDir getServoDirFromLUT(uint8_t character, uint8_t *returnCode){
     if(character >= 33 && character <= 127)
         return servoDirLUT[character - 33];
+    else if (character == 32)
+        return SPACE_DIR;
     else if(character == SHIFT_CODE)
         return SHIFT_DIR;
     else if(character == ALT_CODE)
