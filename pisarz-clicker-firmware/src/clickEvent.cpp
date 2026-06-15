@@ -36,7 +36,7 @@ void clickEvent_update(ClickEvent *event, ClickEvent *prevEvent){
             event->state = RETURNING;
         }
     }
-    else if(event->state == RETURNING){ /* RETURNING -> DONE jeśli znajduje się w stanie RETURNING dłużej niż RETURNING_TIME */
+    else if(event->state == RETURNING){ /* RETURNING -> DONE jeśli znajduje się w stanach CLICKING i RETURNING dłużej niż RETURNING_TIME */
         if(time - event->clickingTime >= SERVO_RETURNING_TIME){
             event->state = DONE;
         }

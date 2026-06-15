@@ -91,21 +91,21 @@ void clickEventTab_removeDoneEvents(){
 
 void clickEventTab_updateEvents(){
     ClickEvent prevEvent = clickEvent_createEmpty();
-    for(uint8_t i=0; i < clickEventTabLen; i++){                    /* Iteracja po kolejce klawiszy do kliknięcia */
+    for(uint8_t i=0; i < clickEventTabLen; i++){                /* Iteracja po kolejce klawiszy do kliknięcia */
         if(clickEventTab[i].state != EMPTY){
 
-            if(i != 0 && prevEvent.state < CLICKING)                /* Jeśli poprzedni event nie rozpoczął kliknięcia przerywanie pętli*/
+            if(i != 0 && prevEvent.state < CLICKING)            /* Jeśli poprzedni event nie rozpoczął kliknięcia przerywanie pętli*/
                 break;
 
             uint8_t breakingUpdateLoop = 0;
-            for(uint8_t j=0; j<i; j++){                             /* Jeśli któryś z poprzednich eventów zawiera ten sam klawisz przerywanie pętli*/
+            for(uint8_t j=0; j<i; j++){ /* Jeśli któryś z poprzednich eventów dotyczy tego samego serwomechanizmu przerywanie pętli*/
                 if(key_checkServoEqual(clickEventTab[i].key, clickEventTab[j].key))
                     breakingUpdateLoop = 1;
             }
             if(breakingUpdateLoop)
                 break;
 
-            clickEvent_update(&(clickEventTab[i]), &prevEvent);     /* Aktualizacja eventu*/
+            clickEvent_update(&(clickEventTab[i]), &prevEvent); /* Aktualizacja eventu*/
             prevEvent = clickEventTab[i];
         }
     }
